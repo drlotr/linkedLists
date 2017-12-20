@@ -37,7 +37,15 @@ public class LinkedList {
 	 * If after is null, then it should do nothing.
 	 */
 	public void insertAfter(String data, Node after) {
-		// Add your code here
+		if(after == null) {
+			System.out.println("The given pervious node cannot be null");
+			return;
+		}
+		Node newNode = new Node();
+		newNode.record = data;
+		newNode.next = after.next;
+		after.next = newNode;
+		
 	}
 	
 	/*
@@ -79,10 +87,16 @@ public class LinkedList {
 	 * This method should create a new node and insert it at the end of the list.
 	 */
 	public void insertLast(String data) {
-		Node pointer = head;
-		while (pointer != null) {
-			pointer = pointer.next;
+		Node newNode = new Node();
+		newNode.record = data;
+		if(head == null) {
+			return;
 		}
+		Node current = head;
+		while(null != current.next) {
+			current = current.next;
+		}
+		current.next = newNode;
 	}
 	
 	/*
@@ -91,10 +105,16 @@ public class LinkedList {
 	 */
 	public void deleteLast() {
 		Node pointer = head;
-		while (pointer != null) {
-			pointer = pointer.next;
+		if(head == null) {
+			return;
 		}
-		
+		Node last = head;
+		Node previousToLast = null;
+		while(last.next != null) {
+			previousToLast=last;
+			last = last.next;	
+		}
+		previousToLast.next = null;
 	}
 	
 	/*
@@ -102,6 +122,9 @@ public class LinkedList {
 	 */
 	public void traverseAndPrint() {
 		Node pointer = head;
+		if (head == null) {
+			return;
+		}
 		while (pointer != null) {
 			System.out.println(pointer.record);
 			pointer = pointer.next;
